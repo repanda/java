@@ -16,9 +16,10 @@ import org.junit.jupiter.api.Test;
 public class FileTest {
 
     public String locateFile(String fileName) throws IOException {
-        String home = System.getProperty("user.home");
+//        String home = System.getProperty("/usr/share");
 
-        Path p = Paths.get(home + File.separator + "working" + File.separator + "mygit" + File.separator + "shell");
+//        Path p = Paths.get(home + File.separator + "working" + File.separator + "mygit" + File.separator + "shell");
+        Path p = Paths.get("/usr/share");
 
         Optional<Path> findAny = Files.walk(p, Integer.MAX_VALUE).filter((t) -> {
             return t.toFile().isFile() && t.getFileName().toString().equals(fileName);
@@ -26,6 +27,8 @@ public class FileTest {
 
         if (findAny.isPresent()) {
             Path get = findAny.get();
+            System.out.println("#" + get);
+
             return get.toString();
         }
 
@@ -35,8 +38,8 @@ public class FileTest {
     @Test
     public void GivenFileName_WhenLocateIt_ThenGetItsAbsolutePath() throws IOException {
 
-        assertNotNull(locateFile("toto"));
-        assertNull(locateFile("shell")); // exclude folders
+        assertNotNull(locateFile("00.jpg"));
+//        assertNull(locateFile("shell")); // exclude folders
     }
 
 }

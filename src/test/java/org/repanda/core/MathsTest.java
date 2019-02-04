@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.OptionalInt;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Disabled;
 
 /**
  *
@@ -24,6 +25,7 @@ public class MathsTest {
     }
 
     @Test
+    @Disabled
     public void GivenListInteger_ThenReturnTheClosestToZero() {
         int[] test1 = {3, 4, 1, 12, 98, 10, 11}; // positive values
         assertEquals(1, closestToZero(test1));
@@ -36,4 +38,17 @@ public class MathsTest {
         int[] test3 = {};
         assertEquals(0, closestToZero(test3)); // emplty array
     }
+
+    public int sumOfInts(int[] ints) {
+        return Arrays.stream(ints)
+                .filter(p -> (p >= 10 && p <= 100)) //intermediate operation using lambda expressions
+                .sum(); // terminal operation
+    }
+
+    @Test
+    public void GivenListInteger_ThenReturnTheSumofInts() {
+        int[] ints = {2, 3, 50, 10, 100, 101};
+        assertEquals(160, sumOfInts(ints));
+    }
+
 }
